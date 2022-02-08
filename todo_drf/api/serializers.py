@@ -2,7 +2,12 @@ from rest_framework import serializers
 from .models import Task
 
 
-class TaskSerializer(serializers.Serializer):
+class TaskSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Task
+        fields = '__all__'
+
     title = serializers.CharField(max_length=200)
     completed = serializers.BooleanField(default=False)
 
@@ -11,3 +16,6 @@ class TaskSerializer(serializers.Serializer):
         Create and return a new `Task` instance, given the validated data.
         """
         return Task.objects.create(**validated_data)
+
+
+
